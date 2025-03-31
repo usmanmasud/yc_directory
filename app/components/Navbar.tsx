@@ -1,5 +1,4 @@
 import { auth, signOut, signIn } from "@/auth";
-import { redirect } from "next/dist/server/api-utils";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -21,7 +20,8 @@ const Navbar = async () => {
               </Link>
               <form
                 action={async () => {
-                  "use`server`";
+                  "use server";
+
                   await signOut({ redirectTo: "/" });
                 }}
               >
