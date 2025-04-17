@@ -1,6 +1,8 @@
 import SearchForm from "@/components/SearchForm";
-import SearchFormReset from "@/components/SearchFormReset";
 import StartupCard from "@/components/StartupCard";
+import { client } from "@/sanity/lib/client";
+import { STARTUPS_QUERY } from "@/sanity/lib/quaries";
+import { startupCardType } from "@/components/StartupCard";
 
 export default async function Home({
   searchParams,
@@ -9,18 +11,9 @@ export default async function Home({
 }) {
   const query = (await searchParams).query;
 
-  const posts = [
-    {
-      _createdAt: new Date().toISOString(),
-      views: "33",
-      author: { _id: 1, name: "usman masud" },
-      _id: 1,
-      description: "this is a desctip",
-      category: "education",
-      title: "Test tittle",
-      image: "https://usmanmasud.vercel.app/brainwavw.png",
-    },
-  ];
+  const posts = await client.fetch(STARTUPS_QUERY);
+
+  console.log(JSON.stringify(posts));
 
   return (
     <>
@@ -39,7 +32,7 @@ export default async function Home({
         </p>
         <ul className="mt-7 card_grid">
           {posts.length > 0 ? (
-            posts.map((post, index) => (
+            posts.map((post: any) => (
               <StartupCard key={post?._id} post={post} />
             ))
           ) : (
