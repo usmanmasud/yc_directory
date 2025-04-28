@@ -6,7 +6,7 @@ import React from "react";
 import { Button } from "./ui/button";
 import { Author, Startup } from "@/sanity.types";
 
-export type startupCardType = Omit<Startup, "author"> & { author: Author };
+export type startupCardType = Omit<Startup, "author"> & { author?: Author };
 
 const StartupCard = ({ post }: { post: startupCardType }) => {
   const {
